@@ -42,17 +42,17 @@ sudo systemctl restart apache2.service
 echo '输入数据库名,希望将WordPress安装到的数据库名称'
 read DATABASE
 echo '输入数据库名,希望将WordPress安装到的数据库名称' >> $log
-echo DATABASE >> $log
+echo $DATABASE >> $log
 
 echo '输入要设定的数据库用户名,您的数据库用户名。'
 read USER
 echo '输入要设定的数据库用户名,您的数据库用户名。'>>$log
-echo USER >> $log
+echo $USER >> $log
 
 echo '设定数据库密码'
 read password
 echo '设定数据库密码' >>$log
-echo password >> $log
+echo $password >> $log
 
 #!/bin/bash
 MYSQL=`which mysql`
