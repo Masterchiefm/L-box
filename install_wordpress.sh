@@ -39,14 +39,20 @@ sudo systemctl restart apache2.service
 ############
 # 设置数据库#
 ############
-echo '输入要设定的数据库用户名'
-read USER
-echo '输入数据库名'
+echo '输入数据库名,希望将WordPress安装到的数据库名称'
 read DATABASE
-echo '输入数据表名'
-read TABLE
+echo '输入数据库名,希望将WordPress安装到的数据库名称' >> $log
+echo DATABASE >> $log
+
+echo '输入要设定的数据库用户名,您的数据库用户名。'
+read USER
+echo '输入要设定的数据库用户名,您的数据库用户名。'>>$log
+echo USER >> $log
+
 echo '设定数据库密码'
 read password
+echo '设定数据库密码' >>$log
+echo password >> $log
 
 #!/bin/bash
 MYSQL=`which mysql`
@@ -66,3 +72,4 @@ mv -f /tmp/wordpress/* /var/www/html
 sudo chmod -R 777 /var/www/html/
 sudo mv /var/www/html/index.html /var/www/html/index.html0
 sudo systemctl restart apache2.service
+cat $log
