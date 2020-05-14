@@ -11,7 +11,6 @@ from os import system
 
 
 def cmd():
-    system('clear')
     print('====================L-box=====================')
     print('\t 1. 安装Aria2Dash')
     print('\t 2. 安装WordPress')
