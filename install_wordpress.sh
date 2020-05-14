@@ -54,13 +54,13 @@ read password
 echo '设定数据库密码' >>$log
 echo $password >> $log
 
-#!/bin/bash
+# mysql输入
 MYSQL=`which mysql`
 $MYSQL  -u root << EOF
 CREATE DATABASE $DATABASE;
 CREATE USER $USER;
 SET PASSWORD FOR $USER= PASSWORD("$password");
-GRANT ALL PRIVILEGES ON $DATABASE.* TO $USER IDENTIFIED BY"$password";
+GRANT ALL PRIVILEGES ON $DATABASE.* TO $USER IDENTIFIED BY "$password";
 FLUSH PRIVILEGES;
 EOF
 
