@@ -35,14 +35,12 @@ def cmd():
 
 
 if __name__  == "__main__":
-    try:
-        a = True
-        while a:
-            CMD = cmd()
-            if CMD == '0':
-                a = False
-            else:
-                system(CMD)
-    except:
-        print('出错啦')
+    a = True
+    while a:
+        CMD = cmd()
+        if CMD == '0':
+            a = False
+        else:
+            system(CMD)
+
 
