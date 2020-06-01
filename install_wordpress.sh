@@ -36,6 +36,28 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 sudo service mysql restart
 sudo systemctl restart apache2.service
 
+
+
+
+## 下载wp
+wget https://cn.wordpress.org/latest-zh_CN.zip -O /tmp/wp.zip
+unzip /tmp/wp.zip -d /tmp
+mv -f /tmp/wordpress/* /var/www/html
+sudo chmod -R 777 /var/www/html/
+sudo mv /var/www/html/index.html /var/www/html/index.html0
+sudo systemctl restart apache2.service
+
+
+
+cat << EOF >> /var/www/html/wp-config.php
+/** 设置WordPress可以不使用ftp */
+define(“FS_METHOD”, “direct”);  
+define(“FS_CHMOD_DIR”, 0777);
+define(“FS_CHMOD_FILE”, 0777);
+EOF
+chmod 777 -R /var/www/html
+service apache2 restart
+ 
 ############
 # 设置数据库#
 ############
@@ -59,17 +81,12 @@ MYSQL=`which mysql`
 $MYSQL  -u root << EOF
 CREATE DATABASE $DATABASE;
 CREATE USER $USER;
-SET PASSWORD FOR $USER= PASSWORD("$password");
-GRANT ALL PRIVILEGES ON $DATABASE.* TO $USER IDENTIFIED BY "$password";
+SET PASSWORD FOR $USER =  '$password';
+#SET PASSWORD FOR $USER= PASSWORD("$password");
+GRANT ALL PRIVILEGES ON *.* TO '$USER'@'%' WITH GRANT OPTION;
+#GRANT ALL PRIVILEGES ON $DATABASE.* TO $USER IDENTIFIED BY "$password";
 FLUSH PRIVILEGES;
+exit;
 EOF
 
-
-## 下载wp
-wget https://cn.wordpress.org/latest-zh_CN.zip -O /tmp/wp.zip
-unzip /tmp/wp.zip -d /tmp
-mv -f /tmp/wordpress/* /var/www/html
-sudo chmod -R 777 /var/www/html/
-sudo mv /var/www/html/index.html /var/www/html/index.html0
-sudo systemctl restart apache2.service
 cat $log
