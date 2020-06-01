@@ -49,12 +49,7 @@ sudo systemctl restart apache2.service
 
 
 
-cat << EOF >> /var/www/html/wp-config.php
-/** 设置WordPress可以不使用ftp */
-define("FS_METHOD","direct");
-define("FS_CHMOD_DIR", 0777);
-define("FS_CHMOD_FILE", 0777);
-EOF
+
 
 cat << EOF >> /var/www/html/.htaccess 
 php_value upload_max_filesize 128M
