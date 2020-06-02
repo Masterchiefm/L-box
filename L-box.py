@@ -19,11 +19,19 @@ def cmd():
     print('====================L-box=====================')
     option = int(input('输入选项: '))
     if option == 1:
-        cmd = """sudo apt install curl -y && bash <(curl -s -L https://github.com/Masterchiefm/Aria2Dash/raw/master/Aria2Dash.sh)"""
+        system('rm -rf /tmp/lboxtmpsrc')
+        system('wget https://github.com/Masterchiefm/Aria2Dash/raw/master/Aria2Dash.sh -O /tmp/lboxtmpsrc')
+        cmd = '1'
+        
     elif option == 2:
-        cmd = """sudo apt install curl -y && bash <(curl -s -L https://raw.githubusercontent.com/Masterchiefm/L-box/master/install_wordpress.sh)"""
+        system('rm -rf /tmp/lboxrmpsrc')
+        system('wget https://raw.githubusercontent.com/Masterchiefm/L-box/master/install_wordpress.sh -O /tmp/lboxtmpsrc')
+        cmd = '2'
+        
     elif option == 3:
-        cmd = """echo '还没做'"""
+        system('rm -rf /tmp/lboxrmpsrc')
+        system('wget  https://raw.githubusercontent.com/Masterchiefm/L-box/master/create_service.sh -O /tmp/lboxtmpsrc')
+        cmd = '3'
     elif option == 0:
         cmd = '0'
     else:
@@ -41,6 +49,7 @@ if __name__  == "__main__":
         if CMD == '0':
             a = False
         else:
-            system(CMD)
+            system('''bash /tmp/lboxtmpsrc''')
+            system('rm -rf /tmp/lboxtmpsrc')
 
 
